@@ -26,8 +26,6 @@ git clone https://github.com/antunnitraj/ffcompress
 cd ffcompress
 chmod +x ./install
 sudo ./install
-cd ..
-rm -rf ffcompress
 ```
 ## Uninstallation
 For this installation you need root access!

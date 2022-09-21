@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+SIZE=8
+while getopts i:o:s: OPTION; do
+	case $OPTION in
+	i)
+		INPUT=$OPTARG
+		OUTPUT="$(dirname "$INPUT")"
+		;;
+	o)
+		OUTPUT=$OPTARG
+		;;
+	s)
+		SIZE=$OPTARG
+		;;
+	\?)
+		echo "script usage: ffcompress [-i input] [-o output] [-s size in mb]" >&2
+		exit 1
+		;;
+	esac
+done
+
+filename=$(basename "$INPUT")
+
+if test -f "$INPUT" && test -d "$OUTPUT"; then
+	echo "[+] File exists! Launching ffmpeg compress script"
+	target_size=$(( $SIZE * 1000 * 1000 * 8 ))
+	length=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$INPUT"`
+	length_round_up=$(( ${length%.*} + 1 ))
+	total_bitrate=$(( $target_size / $length_round_up ))
+	audio_bitrate=$(( 128 * 1000 ))
+	video_bitrate=$(( $total_bitrate - $audio_bitrate ))
+	ffmpeg -i "$INPUT" -b:v $video_bitrate -maxrate:v $video_bitrate -bufsize:v $(( $target_size / 20 )) -b:a $audio_bitrate "${OUTPUT}/${filename%.*}-${SIZE}mb.${filename#*.}"
+else
+	echo "script usage: ffcompress [-i input video] [-o output directory] [-s size in MB]" >&2
+	exit 1
+fi

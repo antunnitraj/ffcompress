@@ -31,7 +31,7 @@ filename=$(basename "$INPUT")
 outputname="${OUTPUT}/${filename%.*}-${SIZE}mb.${filename#*.}"
 
 if [ "$NAME" != "" ]; then
-	outputname="${OUTPUT}/${NAME}-${SIZE}mb.${EXT}"
+	outputname="${OUTPUT}/${NAME}.${EXT}"
 fi
 
 if test -f "$INPUT" && test -d "$OUTPUT"; then

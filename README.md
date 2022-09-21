@@ -7,5 +7,6 @@ For this installation you need root access!
 ``` 
 git clone https://github.com/antunnitraj/ffcompress
 cd ffcompress
-sudo bash install.sh
+chmod +x install
+sudo ./install
 ```

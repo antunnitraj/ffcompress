@@ -3,4 +3,4 @@ cp ffcompress /usr/bin/ffcompress
 chmod +x /usr/bin/ffcompress
 if ! test -f "/usr/bin/ffmpeg"; then
 	echo "[!] PLEASE INSTALL FFMPEG USING YOUR PACKAGE MANAGER!"
-else
+fi

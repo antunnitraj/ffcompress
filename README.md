@@ -23,8 +23,10 @@ ffcompress -i video.mp4 -s 1
 For this installation you need root access!
 ``` 
 git clone https://github.com/antunnitraj/ffcompress
-chmod +x ffcompress/install
-sudo ffcompress/install
+cd ffcompress
+chmod +x ./install
+sudo ./install
+cd ..
 rm -rf ffcompress
 ```
 ## Uninstallation

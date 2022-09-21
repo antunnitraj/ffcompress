@@ -10,3 +10,8 @@ cd ffcompress
 chmod +x install
 sudo ./install
 ```
+## Uninstallation
+For this installation you need root access!
+``` 
+sudo rm -rf /usr/bin/ffcompress
+```

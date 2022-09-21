@@ -1,7 +1,7 @@
 # ffcompress
 Video compressor using ffmpeg
 ## Features
-Custom size for output (default it 8mb if not declared)
+Custom size for output (default it 8mb if not declared). Default save location is the same as inputed video.
 ## Usage
 ```
 ffcompress [-i input video] [-o output directory] [-s size in MB]
@@ -9,7 +9,7 @@ ffcompress [-i input video] [-o output directory] [-s size in MB]
 ### Here are some examples on how to use this tool:
 Compressing a video into a discord uploadable video under 8mb:
 ```
-ffcompress -i video.mp4 #output will be saved in the directory of the input video
+ffcompress -i video.mp4
 ```
 Compressing a video and saving an output into a custom directory:
 ```

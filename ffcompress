@@ -42,10 +42,12 @@ if test -f "$INPUT" && test -d "$OUTPUT"; then
 	video_bitrate=$(( $total_bitrate - $audio_bitrate ))
 	ffmpeg -i "$INPUT" -b:v $video_bitrate -maxrate:v $video_bitrate -bufsize:v $(( $target_size / 20 )) -b:a $audio_bitrate "$outputname"
 else
-	echo "FFCOMPRESS USAGE:"
-	echo "   -i   input video file"
-	echo "   -o   output video directory [default: input file dir]"
-	echo "   -s   exported video maximum size [mb, default: 8]"
-	echo "   -n   exported video name [default: FILENAME-Xmb]"
-	echo "   -e   extension of exported video file"
+	echo "ffcompress v0.3.0"
+	echo "  built using bash and ffmpeg"
+	echo "ffcompress usage:"
+	echo "  -i  input video file"
+	echo "  -o  output video directory [default: input file dir]"
+	echo "  -s  exported video maximum size [mb, default: 8]"
+	echo "  -n  exported video name [default: FILENAME-Xmb]"
+	echo "  -e  extension of exported video file"
 fi

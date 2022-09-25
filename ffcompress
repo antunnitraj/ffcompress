@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-EXT="mp4"
 SIZE=8
 while getopts i:o:s:n:e: OPTION; do
 	case $OPTION in
 	i)
 		INPUT=$OPTARG
+		filename=$(basename "$INPUT")
 		OUTPUT="$(dirname "$INPUT")"
+		EXT=${filename#*.}
 		;;
 	o)
 		OUTPUT=$OPTARG
@@ -27,15 +28,12 @@ while getopts i:o:s:n:e: OPTION; do
 	esac
 done
 
-filename=$(basename "$INPUT")
-outputname="${OUTPUT}/${filename%.*}-${SIZE}mb.${filename#*.}"
-
-if [ "$NAME" != "" ]; then
-	outputname="${OUTPUT}/${NAME}.${EXT}"
-fi
-
 if test -f "$INPUT" && test -d "$OUTPUT"; then
 	echo "[+] File exists! Launching ffmpeg compress script"
+	outputname="${OUTPUT}/${filename%.*}-${SIZE}mb.${EXT}"
+	if [ "$NAME" != "" ]; then
+		outputname="${OUTPUT}/${NAME}.${EXT}"
+	fi
 	target_size=$(( $SIZE * 1000 * 1000 * 8 ))
 	length=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$INPUT"`
 	length_round_up=$(( ${length%.*} + 1 ))
